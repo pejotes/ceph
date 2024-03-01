@@ -518,7 +518,7 @@ local u = import 'utils.libsonnet';
       ])
       .addTargets([
         u.addTargetSchema(
-          expr='sum(irate(ceph_osd_op_r{%(matchers)s}[1m]))',
+          expr='sum(irate(ceph_osd_op_r{%(matchers)s}[1m]))' % $.matchers(),
           legendFormat='',
           datasource='${DS_PROMETHEUS}',
           instant=true,
