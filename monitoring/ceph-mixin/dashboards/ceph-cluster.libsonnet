@@ -58,7 +58,13 @@ local u = import 'utils.libsonnet';
       ],
       auto=true,
     )
-  ).addPanels(
+  ).addTemplate(
+    $.addClusterTemplate()
+  )
+  .addTemplate(
+    $.addJobTemplate()
+  )
+  .addPanels(
     [
       u.addRowSchema(collapse=false, showTitle=true, title='CLUSTER STATE') + { gridPos: { x: 0, y: 0, w: 24, h: 1 } },
       u.addStatPanel(
