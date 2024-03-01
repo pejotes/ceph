@@ -30,7 +30,7 @@ local u = import 'utils.libsonnet';
   ).addRequired(
     type='panel', id='singlestat', name='Singlestat', version='5.0.0'
   ).
-    addTemplate(g.template.datasource('DS_PROMETHEUS', 'prometheus', 'default', label='Data Source')).
+    addTemplate(g.template.datasource('datasource', 'prometheus', 'default', label='Data Source')).
     addTemplate(
     u.addCustomTemplate(
       name='interval',
@@ -119,7 +119,7 @@ local u = import 'utils.libsonnet';
         { color: 'rgba(50, 172, 45, 0.97)', value: 0.3 },
       ])
       .addTarget(u.addTargetSchema(
-        expr='(ceph_cluster_total_bytes{%(matchers)s}-ceph_cluster_total_used_bytes{})/ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
+        expr='(ceph_cluster_total_bytes{%(matchers)s}-ceph_cluster_total_used_bytes{%(matchers)s}})/ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
         instant=true,
         interval='$interval',
         datasource='${DS_PROMETHEUS}',
@@ -1554,7 +1554,7 @@ local u = import 'utils.libsonnet';
         ])
         .addTargets([
           u.addTargetSchema(
-            expr='avg(ceph_osd_apply_latency_ms{})',
+            expr='avg(ceph_osd_apply_latency_ms{%(matchers)s}})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             legendFormat='apply',
             interval='$interval',
@@ -1562,7 +1562,7 @@ local u = import 'utils.libsonnet';
             step=4,
           ),
           u.addTargetSchema(
-            expr='avg(ceph_osd_commit_latency_ms{})',
+            expr='avg(ceph_osd_commit_latency_ms{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             legendFormat='commit',
             interval='$interval',
