@@ -70,7 +70,6 @@ local u = import 'utils.libsonnet';
       u.addStatPanel(
         title='Ceph health status',
         unit='none',
-        datasource='${DS_PROMETHEUS}',
         gridPosition={ x: 0, y: 1, w: 3, h: 3 },
         colorMode='value',
         interval='1m',
@@ -98,8 +97,7 @@ local u = import 'utils.libsonnet';
         expr='ceph_health_status{%(matchers)s}' % $.matchers(),
         instant=true,
         interval='$interval',
-        datasource='${DS_PROMETHEUS}',
-        step=301,
+        step=300,
       )),
 
       u.addGaugePanel(
@@ -119,7 +117,7 @@ local u = import 'utils.libsonnet';
         { color: 'rgba(50, 172, 45, 0.97)', value: 0.3 },
       ])
       .addTarget(u.addTargetSchema(
-        expr='(ceph_cluster_total_bytes{%(matchers)s}-ceph_cluster_total_used_bytes{%(matchers)s}})/ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
+        expr='(ceph_cluster_total_bytes{%(matchers)s}-ceph_cluster_total_used_bytes{%(matchers)s})/ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
         instant=true,
         interval='$interval',
         datasource='${DS_PROMETHEUS}',
