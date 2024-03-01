@@ -120,7 +120,6 @@ local u = import 'utils.libsonnet';
         expr='(ceph_cluster_total_bytes{%(matchers)s}-ceph_cluster_total_used_bytes{%(matchers)s})/ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
         instant=true,
         interval='$interval',
-        datasource='${DS_PROMETHEUS}',
         step=300
       )),
 
@@ -1463,7 +1462,7 @@ local u = import 'utils.libsonnet';
         ])
         .addTargets([
           u.addTargetSchema(
-            expr='avg(ceph_osd_apply_latency_ms{%(matchers)s}})' % $.matchers(),
+            expr='avg(ceph_osd_apply_latency_ms{%(matchers)s})' % $.matchers(),
             legendFormat='apply',
             interval='$interval',
             metric='ceph_osd_perf_apply_latency_seconds',
