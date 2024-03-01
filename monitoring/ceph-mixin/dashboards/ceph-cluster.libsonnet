@@ -30,7 +30,7 @@ local u = import 'utils.libsonnet';
   ).addRequired(
     type='panel', id='singlestat', name='Singlestat', version='5.0.0'
   ).
-    addTemplate(g.template.datasource('DS_PROMETHEUS', 'prometheus', 'Prometheus', label='Data Source')).
+    addTemplate(g.template.datasource('DS_PROMETHEUS', 'prometheus', 'default', label='Data Source')).
     addTemplate(
     u.addCustomTemplate(
       name='interval',
@@ -94,7 +94,7 @@ local u = import 'utils.libsonnet';
         { color: 'rgba(237, 129, 40, 0.89)', value: 1 },
         { color: 'rgba(245, 54, 54, 0.9)', value: 2 },
       ])
-      .addTarget(u.addTargetSchema(
+      .addTarget($.addTargetSchema(
         expr='ceph_health_status{%(matchers)s}' % $.matchers(),
         instant=true,
         interval='$interval',
