@@ -99,7 +99,7 @@ local u = import 'utils.libsonnet';
         instant=true,
         interval='$interval',
         datasource='${DS_PROMETHEUS}',
-        step=300,
+        step=301,
       )),
 
       u.addGaugePanel(
