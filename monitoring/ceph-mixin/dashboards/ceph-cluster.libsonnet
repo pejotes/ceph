@@ -167,7 +167,7 @@ local u = import 'utils.libsonnet';
         { color: 'green' },
       ])
       .addTarget(u.addTargetSchema(
-        expr='sum(irate(ceph_osd_op_w_in_bytes{%(matchers)s}[5m]))' $.matchers(),
+        expr='sum(irate(ceph_osd_op_w_in_bytes{%(matchers)s}[5m]))' % $.matchers(),
         instant=true,
         interval='$interval',
         datasource='${DS_PROMETHEUS}',
@@ -190,7 +190,7 @@ local u = import 'utils.libsonnet';
         { color: '#9ac48a', value: 0 },
       ])
       .addTarget(u.addTargetSchema(
-        expr='sum(irate(ceph_osd_op_r_out_bytes{%(matchers)s}[5m]))' $.matchers(),
+        expr='sum(irate(ceph_osd_op_r_out_bytes{%(matchers)s}[5m]))' % $.matchers(),
         instant=true,
         interval='$interval',
         datasource='${DS_PROMETHEUS}',
@@ -237,7 +237,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='count(ceph_osd_metadata{%(matchers)s})' $.matchers(),
+          expr='count(ceph_osd_metadata{%(matchers)s})' % $.matchers(),
           legendFormat='All',
           interval='$interval',
           datasource='${DS_PROMETHEUS}',
@@ -251,7 +251,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='count(ceph_osd_in{%(matchers)s})' $.matchers(),
+          expr='count(ceph_osd_in{%(matchers)s})' % $.matchers(),
           legendFormat='In',
           interval='$interval',
           datasource='${DS_PROMETHEUS}',
@@ -280,7 +280,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='sum(ceph_osd_up{%(matchers)s})' $.matchers(),
+          expr='sum(ceph_osd_up{%(matchers)s})' % $.matchers(),
           legendFormat='Up',
           interval='',
           datasource='${DS_PROMETHEUS}',
@@ -294,7 +294,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='sum(ceph_osd_up{%(matchers)s} == bool 0)' $.matchers(),
+          expr='sum(ceph_osd_up{%(matchers)s} == bool 0)' % $.matchers(),
           legendFormat='Down',
           interval='',
           warn=1,
@@ -343,7 +343,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='count(ceph_mgr_status{%(matchers)s} == 1) or vector(0)' $.matchers(),
+          expr='count(ceph_mgr_status{%(matchers)s} == 1) or vector(0)' % $.matchers(),
           legendFormat='Active',
           datasource='${DS_PROMETHEUS}',
           instant=true,
@@ -357,7 +357,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Number Threshold',
-          expr='count(ceph_mgr_status{%(matchers)s} == 0) or vector(0)' $.matchers(),
+          expr='count(ceph_mgr_status{%(matchers)s} == 0) or vector(0)' % $.matchers(),
           legendFormat='Standby',
           datasource='${DS_PROMETHEUS}',
           instant=true,
@@ -458,7 +458,7 @@ local u = import 'utils.libsonnet';
       ])
       .addTargets([
         u.addTargetSchema(
-          expr='ceph_cluster_total_used_bytes{%(matchers)s}' $.matchers(),
+          expr='ceph_cluster_total_used_bytes{%(matchers)s}' % $.matchers(),
           legendFormat='',
           datasource='${DS_PROMETHEUS}',
           instant=true,
@@ -487,7 +487,7 @@ local u = import 'utils.libsonnet';
       ])
       .addTargets([
         u.addTargetSchema(
-          expr='sum(irate(ceph_osd_op_w{%(matchers)s}[1m]))' $.matchers(),
+          expr='sum(irate(ceph_osd_op_w{%(matchers)s}[1m]))' % $.matchers(),
           legendFormat='',
           datasource='${DS_PROMETHEUS}',
           instant=true,
@@ -566,7 +566,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Text Only',
-          expr='sum(ceph_mon_quorum_status{%(matchers)s})' $.matchers(),
+          expr='sum(ceph_mon_quorum_status{%(matchers)s})' % $.matchers(),
           legendFormat='In Quorum',
           datasource='${DS_PROMETHEUS}',
         ),
@@ -580,7 +580,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='When Alias Displayed',
           units='none',
           valueHandler='Text Only',
-          expr='count(ceph_mon_quorum_status{%(matchers)s})' $.matchers(),
+          expr='count(ceph_mon_quorum_status{%(matchers)s})' % $.matchers(),
           legendFormat='Total',
           datasource='${DS_PROMETHEUS}',
           warn=2,
@@ -595,7 +595,7 @@ local u = import 'utils.libsonnet';
           displayValueWithAlias='Never',
           units='none',
           valueHandler='Number Threshold',
-          expr='count(ceph_mon_quorum_status{%(matchers)s}) - sum(ceph_mon_quorum_status{%(matchers)s})' $.matchers(),
+          expr='count(ceph_mon_quorum_status{%(matchers)s}) - sum(ceph_mon_quorum_status{%(matchers)s})' % $.matchers(),
           legendFormat='MONs out of Quorum',
           datasource='${DS_PROMETHEUS}',
           warn=1.1,
@@ -677,7 +677,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='ceph_cluster_total_bytes{%(matchers)s}' $.matchers(),
+            expr='ceph_cluster_total_bytes{%(matchers)s}' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             instant=false,
@@ -686,7 +686,7 @@ local u = import 'utils.libsonnet';
             range=true,
           ),
           u.addTargetSchema(
-            expr='ceph_cluster_total_used_bytes{%(matchers)s}' $.matchers(),
+            expr='ceph_cluster_total_used_bytes{%(matchers)s}' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             instant=false,
@@ -721,7 +721,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='sum(irate(ceph_osd_op_w_in_bytes{%(matchers)s}[5m]))' $.matchers(),
+            expr='sum(irate(ceph_osd_op_w_in_bytes{%(matchers)s}[5m]))' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Write',
@@ -729,7 +729,7 @@ local u = import 'utils.libsonnet';
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(irate(ceph_osd_op_r_out_bytes{%(matchers)s}[5m]))' $.matchers(),
+            expr='sum(irate(ceph_osd_op_r_out_bytes{%(matchers)s}[5m]))' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Read',
@@ -764,7 +764,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='sum(irate(ceph_osd_op_w{%(matchers)s}[1m]))' $.matchers(),
+            expr='sum(irate(ceph_osd_op_w{%(matchers)s}[1m]))' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Write',
@@ -772,7 +772,7 @@ local u = import 'utils.libsonnet';
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(irate(ceph_osd_op_r{%(matchers)s}[1m]))' $.matchers(),
+            expr='sum(irate(ceph_osd_op_r{%(matchers)s}[1m]))' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Read',
@@ -807,7 +807,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='(ceph_pool_bytes_used{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' $.matchers(),
+            expr='(ceph_pool_bytes_used{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='{{name}}',
@@ -851,7 +851,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='(ceph_pool_stored_raw{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})',
+            expr='(ceph_pool_stored_raw{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='',
             legendFormat='{{name}}',
@@ -887,7 +887,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='(ceph_pool_quota_objects{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})',
+            expr='(ceph_pool_quota_objects{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='',
             legendFormat='{{name}}',
@@ -921,7 +921,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='(ceph_pool_quota_bytes{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})',
+            expr='(ceph_pool_quota_bytes{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='',
             legendFormat='{{name}}',
@@ -955,7 +955,7 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='(ceph_pool_objects{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})',
+            expr='(ceph_pool_objects{%(matchers)s}) *on (pool_id) group_left(name)(ceph_pool_metadata{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='',
             legendFormat='{{name}}',
@@ -1050,28 +1050,28 @@ local u = import 'utils.libsonnet';
       .addTargets(
         [
           u.addTargetSchema(
-            expr='sum(ceph_pg_active{%(matchers)s})',
+            expr='sum(ceph_pg_active{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Active',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_clean{%(matchers)s})',
+            expr='sum(ceph_pg_clean{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Clean',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_peering{%(matchers)s})',
+            expr='sum(ceph_pg_peering{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Peering',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_degraded{%(matchers)s})',
+            expr='sum(ceph_pg_degraded{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Degraded',
@@ -1079,7 +1079,7 @@ local u = import 'utils.libsonnet';
             step=300,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_stale{%(matchers)s})',
+            expr='sum(ceph_pg_stale{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Stale',
@@ -1087,7 +1087,7 @@ local u = import 'utils.libsonnet';
             step=300,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_unclean_pgs{%(matchers)s})',
+            expr='sum(ceph_unclean_pgs{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Unclean',
@@ -1095,7 +1095,7 @@ local u = import 'utils.libsonnet';
             step=300,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_undersized{%(matchers)s})',
+            expr='sum(ceph_pg_undersized{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Undersized',
@@ -1103,98 +1103,98 @@ local u = import 'utils.libsonnet';
             step=300,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_incomplete{%(matchers)s})',
+            expr='sum(ceph_pg_incomplete{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Incomplete',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_forced_backfill{%(matchers)s})',
+            expr='sum(ceph_pg_forced_backfill{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Forced Backfill',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_forced_recovery{%(matchers)s})',
+            expr='sum(ceph_pg_forced_recovery{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Forced Recovery',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_creating{%(matchers)s})',
+            expr='sum(ceph_pg_creating{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Creating',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_wait_backfill{%(matchers)s})',
+            expr='sum(ceph_pg_wait_backfill{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Wait Backfill',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_deep{%(matchers)s})',
+            expr='sum(ceph_pg_deep{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Deep',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_scrubbing{%(matchers)s})',
+            expr='sum(ceph_pg_scrubbing{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Scrubbing',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_recovering{%(matchers)s})',
+            expr='sum(ceph_pg_recovering{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Recovering',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_repair{%(matchers)s})',
+            expr='sum(ceph_pg_repair{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Repair',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_down{%(matchers)s})',
+            expr='sum(ceph_pg_down{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Down',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_peered{%(matchers)s})',
+            expr='sum(ceph_pg_peered{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Peered',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_backfill{%(matchers)s})',
+            expr='sum(ceph_pg_backfill{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Backfill',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_remapped{%(matchers)s})',
+            expr='sum(ceph_pg_remapped{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Remapped',
             range=true,
           ),
           u.addTargetSchema(
-            expr='sum(ceph_pg_backfill_toofull{%(matchers)s})',
+            expr='sum(ceph_pg_backfill_toofull{%(matchers)s})' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             interval='$interval',
             legendFormat='Backfill Toofull',
@@ -1240,7 +1240,7 @@ local u = import 'utils.libsonnet';
       )
       .addTargets([
         u.addTargetSchema(
-          expr='sum(ceph_pg_degraded{%(matchers)s})',
+          expr='sum(ceph_pg_degraded{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           legendFormat='Degraded',
@@ -1248,7 +1248,7 @@ local u = import 'utils.libsonnet';
           step=300,
         ),
         u.addTargetSchema(
-          expr='sum(ceph_pg_stale{%(matchers)s})',
+          expr='sum(ceph_pg_stale{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           legendFormat='Stale',
@@ -1256,7 +1256,7 @@ local u = import 'utils.libsonnet';
           step=300,
         ),
         u.addTargetSchema(
-          expr='sum(ceph_pg_undersized{%(matchers)s})',
+          expr='sum(ceph_pg_undersized{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           legendFormat='Undersized',
@@ -1290,7 +1290,7 @@ local u = import 'utils.libsonnet';
       ])
       .addTargets([
         u.addTargetSchema(
-          expr='sum(irate(ceph_osd_recovery_ops{%(matchers)s}[$interval]))',
+          expr='sum(irate(ceph_osd_recovery_ops{%(matchers)s}[$interval]))' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           legendFormat='OPS',
@@ -1336,7 +1336,7 @@ local u = import 'utils.libsonnet';
           yBucketSize=10,
           pluginVersion='9.4.7',
         ).addTarget(u.addTargetSchema(
-          expr='ceph_osd_apply_latency_ms{%(matchers)s}',
+          expr='ceph_osd_apply_latency_ms{%(matchers)s}' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           instant=false,
@@ -1385,7 +1385,7 @@ local u = import 'utils.libsonnet';
           yBucketSize=10,
           pluginVersion='9.4.7',
         ).addTarget(u.addTargetSchema(
-          expr='ceph_osd_commit_latency_ms{%(matchers)s}',
+          expr='ceph_osd_commit_latency_ms{%(matchers)s}' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           instant=false,
@@ -1435,7 +1435,7 @@ local u = import 'utils.libsonnet';
           yBucketSize=null,
           pluginVersion='9.4.7',
         ).addTarget(u.addTargetSchema(
-          expr='rate(ceph_osd_op_r_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_r_latency_count{%(matchers)s}[5m]) >= 0',
+          expr='rate(ceph_osd_op_r_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_r_latency_count{%(matchers)s}[5m]) >= 0' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           instant=false,
@@ -1486,7 +1486,7 @@ local u = import 'utils.libsonnet';
           yBucketSize=null,
           pluginVersion='9.4.7',
         ).addTarget(u.addTargetSchema(
-          expr='rate(ceph_osd_op_w_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_w_latency_count{%(matchers)s}[5m]) >= 0',
+          expr='rate(ceph_osd_op_w_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_w_latency_count{%(matchers)s}[5m]) >= 0' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           interval='$interval',
           legendFormat='',
@@ -1517,12 +1517,12 @@ local u = import 'utils.libsonnet';
         ])
         .addTargets([
           u.addTargetSchema(
-            expr='avg(rate(ceph_osd_op_r_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_r_latency_count{%(matchers)s}[5m]) >= 0)',
+            expr='avg(rate(ceph_osd_op_r_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_r_latency_count{%(matchers)s}[5m]) >= 0)' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             legendFormat='Read',
           ),
           u.addTargetSchema(
-            expr='avg(rate(ceph_osd_op_w_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_w_latency_count{%(matchers)s}[5m]) >= 0)',
+            expr='avg(rate(ceph_osd_op_w_latency_sum{%(matchers)s}[5m]) / rate(ceph_osd_op_w_latency_count{%(matchers)s}[5m]) >= 0)' % $.matchers(),
             datasource='${DS_PROMETHEUS}',
             legendFormat='Write',
           ),
@@ -1627,7 +1627,7 @@ local u = import 'utils.libsonnet';
         },
       ]).addTargets([
         u.addTargetSchema(
-          expr='count by (ceph_version)(ceph_osd_metadata{%(matchers)s})',
+          expr='count by (ceph_version)(ceph_osd_metadata{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           format='table',
           hide=false,
@@ -1638,7 +1638,7 @@ local u = import 'utils.libsonnet';
           range=false,
         ),
         u.addTargetSchema(
-          expr='count by (ceph_version)(ceph_mon_metadata{%(matchers)s})',
+          expr='count by (ceph_version)(ceph_mon_metadata{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           format='table',
           hide=false,
@@ -1649,7 +1649,7 @@ local u = import 'utils.libsonnet';
           range=false,
         ),
         u.addTargetSchema(
-          expr='count by (ceph_version)(ceph_mds_metadata{%(matchers)s})',
+          expr='count by (ceph_version)(ceph_mds_metadata{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           format='table',
           hide=false,
@@ -1659,7 +1659,7 @@ local u = import 'utils.libsonnet';
           range=false,
         ),
         u.addTargetSchema(
-          expr='count by (ceph_version)(ceph_rgw_metadata{%(matchers)s})',
+          expr='count by (ceph_version)(ceph_rgw_metadata{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           format='table',
           hide=false,
@@ -1670,7 +1670,7 @@ local u = import 'utils.libsonnet';
           range=false,
         ),
         u.addTargetSchema(
-          expr='count by (ceph_version)(ceph_mgr_metadata{%(matchers)s})',
+          expr='count by (ceph_version)(ceph_mgr_metadata{%(matchers)s})' % $.matchers(),
           datasource='${DS_PROMETHEUS}',
           format='table',
           hide=false,
